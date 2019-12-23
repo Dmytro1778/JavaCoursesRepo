@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <title>adminLogin</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #17a2b8;
+            height: 100vh;
+        }
+
+        .top, .container {
+            text-align: center;
+        }
+
+        .top {
+            padding-top: 5%;
+        }
+
+        .container {
+            margin-top: 10%;
+            width: 30%;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="top">
+        <h1> Тільки для авторизації адміністраторів </h1>
+    </div>
+
+    <div class="container">
+        <form class="login" th:action="@{/admin}" th:method="post" th:object="${administrator}">
+        <div>
+            <input type="text" name="adminName" id="name" placeholder="Ім'я" class="form-control">
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <div>
+            <input type="password" name="password" id="password" placeholder="пароль" class="form-control">
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <div>
+            <input type="submit" name="submit" class="btn btn-info btn-md" value="Увійти">
+        </div>
+    </form>
+
+    <div>
+        <p></p>
+    </div>
+
+    <form th:action="@{/}" th:method="get" >
+        <button class="btn btn-info btn-md" > На головну </button>
+    </form>
+    </div>
+
+</body>
+</html>

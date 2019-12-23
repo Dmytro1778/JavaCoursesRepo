@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>page1</title>
+
+    <style type="text/css">
+
+        html, body{
+            margin:0;
+            padding:0;
+            width:100%;
+        }
+
+
+        .top_div {
+            left: 0;
+            width: 100%;
+            background: radial-gradient(#B22222, #8B0000);
+        }
+
+        .second_top {
+
+            background: radial-gradient(#FFE4B5, #EEE8AA);
+        }
+
+        .middle_div {
+            background: #FFFACD;
+        }
+
+        .layout {
+            width: 100%;
+        }
+
+        .first_sell {
+            width: 100%;
+            text-align: center;
+            color: #FFD700;
+        }
+
+        .second_sell {
+            width: 100%;
+            text-align: center;
+        }
+
+        .admin_button {
+            float: right;
+        }
+
+        .admin_button, .booking_button {
+            border-radius: 5px;
+
+        }
+
+        .basic_sell1 {
+            width: 40%;
+        }
+
+        .basic_sell2 {
+            width: 60%;
+        }
+
+        .places_table {
+            width: 100%;
+            border-spacing: 30px;
+        }
+
+        .cheapper {
+            width: 10%;
+            height: 50px;
+            margin: 5%;
+            background-color: aqua;
+        }
+
+        .expensive {
+            width: 10%;
+            height: 50px;
+            margin: 5%;
+            background-color: yellow;
+        }
+
+        .screen {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .input {
+            border-radius: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            vertical-align: bottom;
+            background: radial-gradient(#B22222, #8B0000);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+        }
+
+        @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+            .topic{
+                margin-left: 9%;
+            }
+        }
+
+        @-moz-document url-prefix()
+        {
+            .topic { margin-left: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="top_div">
+    <table class="layout">
+        <tr class="row">
+            <td class="first_sell">
+                <form th:action="@{/admin}" th:method="get" >
+                    <button class="admin_button"> Для адміністраторів </button>
+                </form>
+                <h1 class="topic"> NEW LINE CINEMA </h1>
+                <p> БРОНЮВАННЯ КВИТКІВ </p>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="second_top">
+    <table class="layout">
+        <tr class="row">
+            <td class="second_sell">
+                <P> СЬОГОДНІ О 19.30 <h2> ТИХООКЕАНСЬКИЙ РУБІЖ: ПОВСТАННЯ </h2> </P>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="middle_div">
+    <table class="layout">
+        <tr>
+            <td class="basic_sell1">
+
+<table class="places_table">
+    <tr>
+        <td class="cheapper"></td>
+        <td>
+            <table>
+                <tr>
+                    <td th:utext="${tickets.get(0).getPrice()}"></td>
+                    <td th:utext="${tickets.get(0).getCurrency()}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="expensive"></td>
+        <td>
+            <table>
+                <tr>
+                    <td th:utext="${tickets.get(6).getPrice()}"></td>
+                    <td th:utext="${tickets.get(6).getCurrency()}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<p></p>
+
+<p> Для бронювання квитків необхідно ввести обране вільне місце та прізвище </p>
+
+<form th:action="@{/booking}" th:method="post" th:object="${tickets}">
+    <div>
+        <input class="input" type="text" name="place" id="place" placeholder="Місце" >
+    </div>
+    <div>
+        <p></p>
+    </div>
+    <div>
+        <input class="input" type="text" name="name" id="name" placeholder="Прізвище">
+    </div>
+    <div>
+        <p></p>
+    </div>
+    <div>
+        <input class="booking_button" type="submit" name="submit" value="Забронювати">
+    </div>
+</form>
+
+<div>
+    <p></p>
+</div>
+            </td>
+            <td class="basic_sell2">
+                <table class="places_table">
+                    <tr>
+                        <td></td>
+                        <td class="screen" colspan="6">
+                            <p> ЕКРАН </p>
+                        </td>
+                        <td></td>
+                    <tr>
+                        <td>
+                        </td>
+                        <td class="cheapper">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(1).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(1).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="cheapper">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(2).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(2).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="cheapper">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(3).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(3).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="cheapper">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(4).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(4).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="cheapper">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(5).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(5).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="cheapper">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(6).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(6).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(7).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(7).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(8).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(8).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(9).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(9).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(10).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(10).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(11).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(11).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(12).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(12).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(13).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(13).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(14).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(14).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(15).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(15).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(16).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(16).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(17).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(17).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(18).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(18).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(19).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(19).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(20).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(20).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(21).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(21).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="expensive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(22).getPlace()}"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td th:utext="${ticket.findTicketByPlace(22).isFree()}"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+
+                        <td class="cheapper">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(23).getPlace()}"> </td>
+                                </tr>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(23).isFree()}"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="cheapper">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(24).getPlace()}"> </td>
+                                </tr>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(24).isFree()}"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="cheapper">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(25).getPlace()}"> </td>
+                                </tr>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(25).isFree()}"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="cheapper">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(26).getPlace()}"> </td>
+                                </tr>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(26).isFree()}"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="cheapper">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(27).getPlace()}"> </td>
+                                </tr>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(27).isFree()}"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td class="cheapper">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(28).getPlace()}"> </td>
+                                </tr>
+                                <tr>
+                                    <td th:utext="${ticket.findTicketByPlace(28).isFree()}"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                </table>
+            </td>
+        </tr>
+
+</table>
+</div>
+
+<div class="footer" >
+    <p> Бронювання квитків також можна здійснити за телефоном +380-777-77-77 </p>
+</div>
+
+</body>
+</html>

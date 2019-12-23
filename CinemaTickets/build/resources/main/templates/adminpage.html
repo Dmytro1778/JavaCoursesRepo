@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <title>adminpage</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #17a2b8;
+            height: 100vh;
+        }
+
+        .top, .container {
+            text-align: center;
+        }
+
+        .top {
+            padding-top: 5%;
+        }
+
+        .container {
+            margin-top: 10%;
+            width: 30%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="top">
+        <h3> Доступ до адміністративної сторінки дозволено </h3>
+    </div>
+
+    <div class="container">
+        <form th:action="@{/dailyresult}" th:method="get" >
+            <button class="btn btn-info btn-md"> Данні за сеанс </button>
+        </form>
+        <p></p>
+        <form th:action="@{/booking_list}" th:method="get" >
+            <button class="btn btn-info btn-md"> Список бронювань </button>
+        </form>
+        <div><p></p></div>
+        <form th:action="@{/}" th:method="get" >
+            <button class="btn btn-info btn-md" > На головну </button>
+        </form>
+    </div>
+
+
+
+</body>
+</html>

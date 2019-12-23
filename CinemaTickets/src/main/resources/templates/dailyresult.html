@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <title>Daylyresault</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #17a2b8;
+            height: 100vh;
+        }
+
+        .top, .container {
+            text-align: center;
+        }
+
+        .top {
+            padding-top: 5%;
+        }
+
+        .container {
+            margin-top: 10%;
+            width: 30%;
+        }
+
+        .table {
+            text-align: left;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="top">
+        <h1> Дані за сеанс </h1>
+    </div>
+
+    <div class="container">
+        <table class="table">
+            <tr>
+                <td> Загальна кількість квитків </td>
+                <td th:utext="${ticket.totalTicketAmount()}"></td>
+            </tr>
+            <tr>
+                <td> Заброньовано </td>
+                <td th:utext="${ticket.bookedTicketAmount()}"></td>
+            </tr>
+            <tr>
+                <td> Загальний прибуток </td>
+                <td th:utext="${ticket.totalIncome()}"></td>
+            </tr>
+            <tr>
+                <td> Грошова одиниця </td>
+                <td th:utext="${ticket.getTicketCurrency()}"></td>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+
+        <div>
+            <p></p>
+        </div>
+
+        <form th:action="@{/}" th:method="get" >
+            <button class="btn btn-info btn-md"> На головну </button>
+        </form>
+
+    </div>
+
+</body>
+</html>
